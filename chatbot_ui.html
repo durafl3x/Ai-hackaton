@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Collect&Go Vollenbot</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Asap:wght@400;500;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <!--<link rel="stylesheet" href="/path/to/font-awesome/css/all.min.css">-->
+</head>
+<body>
+    <div class="chatbot-container">
+        <div id="header">
+            <img src="images/collect_logo_680x680.png" alt="" width="60" height="60">
+        </div>
+        <div id="chatbot">
+            <div id="conversation">
+              <div class="chatbot-message">
+                <p class="chatbot-text">Welkom bij Collect&Go! Waarmee kan ik je helpen?</p>
+              </div>
+            </div>
+            <form id="input-form">
+              <message-container>
+                <input id="input-field" type="text" placeholder="Typ hier je bericht">
+                <button id="submit-button" type="submit">
+                    <i class="fa-solid fa-2x fa-share" style="color: #1687C6;"></i>
+                </button>
+              </message-container>
+                
+            </form>
+        </div>  
+
+    </div>
+
+    <script src="chatbot.js"></script>
+</body>
+</html>
