@@ -22,6 +22,16 @@
     font-family: "roboto";
 }
 
+.bottom-right {
+            position: fixed;
+            bottom: 20px; /* Adjust the distance from the bottom as needed */
+            right: 20px; /* Adjust the distance from the right as needed */
+            background-color: #f1f1f1;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
 .chatbot-container {
     width: 500px;
     margin: 0 auto;
@@ -201,7 +211,7 @@
         </style>
     </head>
     <body>
-        <div class="chatbot-container">
+        <div class="chatbot-container bottom-right">
             <div id="header">
                 <!--<img src="images/collect_logo_680x680.png" alt="" width="60" height="60">-->
             </div>
