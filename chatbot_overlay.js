@@ -1,6 +1,7 @@
 // Create the overlay container div
   var overlayDiv = document.createElement("div");
   overlayDiv.className = "overlay-container";
+  overlayDiv.id = "overlay-container";
 
   
 
