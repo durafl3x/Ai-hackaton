@@ -2,35 +2,7 @@
   var overlayDiv = document.createElement("div");
   overlayDiv.className = "overlay-container";
 
-  // Add custom CSS styles
-  var customStyles = `
-    /* Your CSS styles here */
-    body {
-    display: flex;
-    justify-content: center;
-    font-family: "roboto";
-}
-
-.chatbot-container {
-    width: 500px;
-    margin: 0 auto;
-    background-color: #f5f5f5;
-    border: 1px solid #cccccc;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
   
-  .overlay-container {
-            position: fixed;
-            bottom: 0;
-            right: 0;
-            width: 300px; /* Adjust the width as needed */
-            height: 200px; /* Adjust the height as needed */
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 9999;
-
-
-  `;
 
     // Create the overlay content
   var overlayContent = `
