@@ -22,6 +22,15 @@
     font-family: "roboto";
 }
 
+.overlay-container {
+            position: fixed;
+            bottom: 0;
+            right: 0;
+            width: 300px; /* Adjust the width as needed */
+            height: 200px; /* Adjust the height as needed */
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 9999;
+
 .chatbot-container {
     width: 500px;
     margin: 0 auto;
@@ -226,16 +235,7 @@
   // Add the HTML code to the overlay container
   overlayDiv.innerHTML = overlayContent;
 
-  // Apply CSS styles to the overlay container
-  overlayDiv.style.position = "fixed";
-  overlayDiv.style.bottom = "0";
-  overlayDiv.style.right = "0";
-  overlayDiv.style.width = "200px";
-  overlayDiv.style.height = "500px";
-  overlayDiv.style.background = "rgba(0, 0, 0, 0.5)";
-  overlayDiv.style.zIndex = "9999";
-
-  // Append the overlay container to the body of the webpage
+   // Append the overlay container to the body of the webpage
   document.body.appendChild(overlayDiv);
 })();
 
