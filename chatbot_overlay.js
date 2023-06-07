@@ -265,16 +265,16 @@ inputForm.addEventListener('submit', function(event) {
   message.scrollIntoView({behavior: "smooth"});
 
     // Append the overlay content to the overlay container
-  overlayContent.appendChild(overlayContent);
+  overlayContainer.appendChild(overlayContent);
 
   // Apply CSS styles to the overlay container
-  overlayContent.style.position = "fixed";
-  overlayContent.style.bottom = "0";
-  overlayContent.style.right = "0";
-  overlayContent.style.width = "100px";
-  overlayContent.style.height = "100px";
-  overlayContent.style.background = "rgba(0, 0, 0, 0.5)";
-  overlayContent.style.zIndex = "9999";
+  overlayContainer.style.position = "fixed";
+  overlayContainer.style.bottom = "0";
+  overlayContainer.style.right = "0";
+  overlayContainer.style.width = "100px";
+  overlayContainer.style.height = "100px";
+  overlayContainer.style.background = "rgba(0, 0, 0, 0.5)";
+  overlayContainer.style.zIndex = "9999";
 
   // Append the overlay container to the body of the webpage
   document.body.appendChild(overlayContent);
