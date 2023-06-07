@@ -26,7 +26,7 @@
             position: fixed;
             bottom: 0;
             right: 0;
-            width: 300px; /* Adjust the width as needed */
+            width: 200px; /* Adjust the width as needed */
             height: 200px; /* Adjust the height as needed */
             background: rgba(0, 0, 0, 0.5);
             z-index: 9999;
