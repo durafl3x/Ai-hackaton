@@ -198,7 +198,7 @@
                   </div>
                   <form id="input-form">
                     <message-container>
-                      <input id="input-field" type="text" placeholder="Typ hier je bericht">
+                      <input id="input-field" type="text" placeholder="Hallo, ik wens mijn boodschappen te doen.">
                       <button id="submit-button" type="submit">
                           <i class="fa-solid fa-2x fa-share" style="color: #1687C6;"></i>
                       </button>
