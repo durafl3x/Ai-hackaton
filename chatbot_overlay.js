@@ -22,7 +22,7 @@
     font-family: "roboto";
 }
 
-.overlay-container {
+.overlay-content {
             position: fixed;
             bottom: 0;
             right: 0;
