@@ -22,16 +22,6 @@
     font-family: "roboto";
 }
 
-.bottom-right {
-            position: fixed;
-            bottom: 20px; /* Adjust the distance from the bottom as needed */
-            right: 20px; /* Adjust the distance from the right as needed */
-            background-color: #f1f1f1;
-            padding: 10px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-        }
-
 .chatbot-container {
     width: 500px;
     margin: 0 auto;
@@ -247,8 +237,8 @@
 
   // Apply CSS styles to the overlay container
   overlayDiv.style.position = "fixed";
-  overlayDiv.style.top = "0";
-  overlayDiv.style.left = "0";
+  overlayDiv.style.bottom = "0";
+  overlayDiv.style.right = "0";
   overlayDiv.style.width = "200px";
   overlayDiv.style.height = "500px";
   overlayDiv.style.background = "rgba(0, 0, 0, 0.5)";
