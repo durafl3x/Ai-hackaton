@@ -278,8 +278,8 @@ inputForm.addEventListener('submit', function(event) {
 
   // Apply CSS styles to the overlay container
   overlayContent.style.position = "fixed";
-  overlayContent.style.top = "0";
-  overlayContent.style.left = "0";
+  overlayContent.style.bottom = "0";
+  overlayContent.style.right = "0";
   overlayContent.style.width = "100%";
   overlayContent.style.height = "100%";
   overlayContent.style.background = "rgba(0, 0, 0, 0.5)";
