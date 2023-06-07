@@ -280,8 +280,8 @@ inputForm.addEventListener('submit', function(event) {
   overlayContent.style.position = "fixed";
   overlayContent.style.bottom = "0";
   overlayContent.style.right = "0";
-  overlayContent.style.width = "100%";
-  overlayContent.style.height = "100%";
+  overlayContent.style.width = "100px";
+  overlayContent.style.height = "100px";
   overlayContent.style.background = "rgba(0, 0, 0, 0.5)";
   overlayContent.style.zIndex = "9999";
 
