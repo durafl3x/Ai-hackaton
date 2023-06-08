@@ -1,0 +1,183 @@
+// ==UserScript==
+// @name         Collect & Go Hackathon Demo
+// @namespace    http://tampermonkey.net/
+// @version      0.1
+// @description  try to take over the world!
+// @author       You
+// @match        https://www.collectandgo.be/*
+// @require      https://raw.githubusercontent.com/durafl3x/Ai-hackaton/main/chat_overlay_htmlload.js
+// @require      https://raw.githubusercontent.com/DrWitloof/AI-hackaton/main/openAI.js
+// @icon         data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==
+// @grant        GM_addStyle
+// @grant        GM_xmlhttpRequest
+// ==/UserScript==
+
+const apiKey = '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';
+
+    const promptFormat2 = "ai says: Welkom bij Collect&Go! Waarmee kan ik je helpen?\n\n \
+human says: Hallo, ik wens mijn boodschappen te doen.\n\n \
+ai says: Ok, ik kan je helpen met je boodschappen. Hoeveel mensen zijn er in je gezin?\n\n \
+human says: 4\n\n \
+ai says: Ok, er zijn 4 mensen in je gezin. Hoeveel keer per week moet er gekookt worden?\n\n \
+human says: 2\n\n \
+ai says: Ok, er moet 2 keer per week gekookt worden. Welke beperkingen zijn er?\n\n \
+human says: 1 keer veggie, 1 keer minder dan 30 minuten kooktijd\n\n";
+
+const promptFormat = "ai says: Welkom bij Collect&Go! Waarmee kan ik je helpen?\n\n \
+human says: Hallo, ik wens mijn boodschappen te doen.\n\n \
+ai says: Ok, ik kan je helpen met je boodschappen. Hoeveel mensen zijn er in je gezin?\n\n \
+human says: 4\n\n \
+ai says: Ok, er zijn 4 mensen in je gezin. Hoeveel keer per week moet er gekookt worden?\n\n \
+human says: 2\n\n \
+ai says: Ok, er moet 2 keer per week gekookt worden. Welke beperkingen zijn er?\n\n \
+human says: 1 keer veggie, 1 keer minder dan 30 minuten kooktijd\n\n \
+ai says: Ok, ik zal je een aantal recepten voorstellen. Voor de vegetarische maaltijd kunnen we groenteburgers of ratatouille aanraden. Voor de maaltijd met minder dan 30 minuten kooktijd kunnen we pasta met kip of een omelet maken. Welke recepten lijken je goed?\n\n";
+
+
+(function() {
+
+     function trigger(eventKind, params){
+        var eventData = { detail: params };
+        var event = new CustomEvent(eventKind, eventData);
+        document.dispatchEvent(event);
+    }
+
+    // Create the overlay container div
+    var overlayDiv = document.createElement("div");
+    overlayDiv.className = "overlay-container";
+
+    // Add custom CSS styles
+    var customStyles = `
+      /* Your CSS styles here */
+      body {
+      display: flex;
+      justify-content: center;
+      font-family: "roboto";
+  }
+
+  .chatbot-container {
+      width: 500px;
+      margin: 0 auto;
+      background-color: #f5f5f5;
+      border: 1px solid #cccccc;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+
+    `;
+
+
+
+
+    // Add the HTML code to the overlay container
+    overlayDiv.innerHTML = overlayContent;
+
+    // Apply CSS styles to the overlay container
+    overlayDiv.style.position = "fixed";
+    overlayDiv.style.right = "20%";
+    overlayDiv.style.bottom = "20%";
+    overlayDiv.style.width = "200px";
+    overlayDiv.style.height = "500px";
+    overlayDiv.style.background = "rgba(0, 0, 0, 0.5)";
+    overlayDiv.style.zIndex = "9999999";
+
+    // Append the overlay container to the body of the webpage
+    document.body.appendChild(overlayDiv);
+})();
+
+// Get chatbot elements
+const chatbot = document.getElementById('chatbot');
+const conversation = document.getElementById('conversation');
+const inputForm = document.getElementById('input-form');
+const inputField = document.getElementById('input-field');
+
+// Add event listener to input form
+inputForm.addEventListener('submit', function(event) {
+    // Prevent form submission
+    event.preventDefault();
+
+    // Get user input
+    const input = inputField.value;
+
+    // Clear input field
+    inputField.value = '';
+    const currentTime = new Date().toLocaleTimeString([], { hour: '2-digit', minute: "2-digit" });
+
+    // Add user input to conversation
+    let message = document.createElement('div');
+    message.classList.add('chatbot-message', 'user-message');
+    message.innerHTML = `<p class="user-text" sen
+    tTime="${currentTime}">${input}</p>`;
+      conversation.appendChild(message);
+
+      var conversationSoFar = generateConversationText(document.getElementById('conversation')) + "\n\nai says: ";
+
+
+
+    const prompt = "Je bent een vriendelijke AI chatbot op de website van Collect&Go, de grootste ecommerce food retail specialist in België.\n \
+Daarnaast ben je ook een chef-kok die de mensen helpt bij hun dagelijkse kookbehoeften zoals Jeroen Meus, Pascale Naesens en Piet Huysentruit.\n \
+Je doel is een overzicht van artikels te genereren en dit aan de gebruiker voorstellen. Blijf doorvragen in die richting tot de gebruiker bevestigd dat dit alles is.\n \
+Begeleid de gebruiker door de conversatie: vraag eerst naar de gezinssamenstelling en hoeveel keer er moet gekookt worden en welke beperkingen er eventueel gelden.\n \
+Je wil weten hoeveel keer en voor hoeveel personen er moet gekookt worden zodat we een aantal recepten kunnen voorstellen.\n \
+Probeer te verkrijgen welke voorgestelde recepten goed zijn voor de klant en lijst nadien de ingredienten voor de goedgekeurde recepten op.\n \
+Vervolg volgende conversatie alstublieft, als je het antwoord niet weet geef je dit ook zo weer.\n \
+Ook wanneer er iets niet kan, geef dit ook eerlijk weer.\n \
+Antwoord steeds in het Nederlands. Beperk je tot het AI stuk van de conversatie.\n\n "+ conversationSoFar;
+
+
+
+    openAI(function(r) { addBotResponse(r, currentTime, conversation);}, prompt, apiKey);
+
+
+
+    // Generate chatbot response -
+      //const response = generateResponse(input);
+
+
+
+
+  });
+
+function generateConversationText(divcontent) {
+  const chatbotMessages = divcontent.getElementsByClassName('chatbot-message');
+  const conversionText = [];
+
+  for (let i = 0; i < chatbotMessages.length; i++) {
+    const message = chatbotMessages[i];
+    const messageText = message.querySelector('.chatbot-text, .user-text').textContent.trim();
+    const sender = message.classList.contains('user-message') ? 'human' : 'ai';
+
+    conversionText.push(sender + ' says: ' + messageText);
+  }
+
+  return conversionText.join('\n\n');
+}
+
+function addBotResponse(response, currentTime, conversation)
+{
+    // Add chatbot response to conversation
+      var message = document.createElement('div');
+      message.classList.add('chatbot-message','chatbot');
+      message.innerHTML = `<p class="chatbot-text" sentTime="${currentTime}">${response}</p>`;
+      conversation.appendChild(message);
+      message.scrollIntoView({behavior: "smooth"});
+
+    const promptJson = "Je bent een expert in JSON die ook goed conversaties kan lezen. In volgende conversatie zitten een aantal recepten: \n[[[\n\n"+response+"\n\n]]]\n \
+Geef de recepten uit de conversatie in JSON formaat. Zet bij elk recept de beperkingen die er bijhoren.\n\n \
+Als er geen recepten bijzitten, geef dan een leeg JSON antwoord terug: {} .\n \
+Beperkingen tellen niet mee als recept.\n\n \
+Gebruik de JSON structuur zoals in dit voorbeeld : \n\n \
+{  \"recept\": \"Pasta Carbonara\",\"beperking\": [\"Gluten-free\", \"Vegetarian\"]}\n\n";
+
+    console.log(promptJson);
+    openAI(function(r) { trigger("receiptEvent", r);}, promptJson, apiKey);
+}
+
+function trigger(eventKind, params){
+        var eventData = { detail: params };
+        var event = new CustomEvent(eventKind, eventData);
+        document.dispatchEvent(event);
+    }
+
+
